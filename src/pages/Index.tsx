@@ -67,6 +67,7 @@ const Index = () => {
     }
 
     // join room and ask for state (server will respond with state if implemented)
+    console.log('[SOCKET] emitting join', { auctionId, userId });
     sock.emit("join", { auctionId, userId, purse: 5000 });
 
     // handle server state if provided (best-effort)
