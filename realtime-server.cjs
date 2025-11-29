@@ -8,6 +8,8 @@ const app = express();
 app.use(cors());
 const server = http.createServer(app);
 
+
+
 const io = new Server(server, {
   cors: { origin: "*" }
 });
@@ -87,6 +89,18 @@ io.on("connection", (socket) => {
     console.log("client disconnected", socket.id);
   });
 });
+
+const path = require('path');
+
+// serve static frontend from dist
+const distPath = path.join(__dirname, 'dist');
+app.use(express.static(distPath));
+
+// fallback to index.html for SPA routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(distPath, 'index.html'));
+});
+
 
 const PORT = process.env.REALTIME_PORT || 4000;
 server.listen(PORT, () => console.log("Realtime server listening on", PORT));
