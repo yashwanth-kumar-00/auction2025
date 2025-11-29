@@ -1,0 +1,159 @@
+/* 1️⃣ MUST COME FIRST — @import */
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Roboto:wght@400;500;700&display=swap');
+
+/* 2️⃣ Then Tailwind layers */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 3️⃣ Your custom layers */
+@layer base {
+  :root {
+    --background: 210 40% 98%;
+    --foreground: 222 47% 11%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+
+    --primary: 217 91% 50%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+
+    --accent: 217 91% 60%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 50%;
+
+    --radius: 0.75rem;
+
+    /* Custom Colors */
+    --ipl-blue: 217 91% 50%;
+    --ipl-blue-light: 217 91% 95%;
+    --ipl-blue-dark: 217 91% 35%;
+    --ipl-gold: 45 93% 47%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-card: linear-gradient(180deg, hsl(0 0% 100%), hsl(210 40% 98%));
+    --gradient-timer: linear-gradient(90deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-sold: linear-gradient(135deg, hsl(var(--success)), hsl(142 76% 28%));
+    --gradient-unsold: linear-gradient(135deg, hsl(var(--destructive)), hsl(0 84% 45%));
+
+    /* Shadows */
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.2);
+    --shadow-card: 0 4px 20px hsl(222 47% 11% / 0.08);
+
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 217 91% 50%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 210 40% 96%;
+    --sidebar-accent-foreground: 222 47% 11%;
+    --sidebar-border: 214 32% 91%;
+    --sidebar-ring: 217 91% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-roboto;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-oswald;
+  }
+}
+
+@layer components {
+  .auction-card {
+    @apply relative overflow-hidden rounded-xl border border-border bg-card p-6;
+    box-shadow: var(--shadow-card);
+  }
+
+  .price-tag {
+    @apply font-oswald text-2xl font-bold text-primary;
+  }
+
+  .timer-bar {
+    background: var(--gradient-timer);
+    @apply h-3 rounded-full transition-all duration-100;
+  }
+
+  .glow-effect {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .team-card {
+    @apply relative overflow-hidden rounded-lg border border-border bg-card p-4 transition-all duration-300;
+  }
+
+  .team-card:hover {
+    @apply border-primary/50;
+    box-shadow: 0 0 20px hsl(var(--primary) / 0.1);
+  }
+
+  .player-badge {
+    @apply inline-flex items-center px-4 py-2 rounded-full text-sm font-bold uppercase tracking-wider;
+  }
+}
+
+@layer utilities {
+  .animate-pulse-fast {
+    animation: pulse 0.5s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-shake {
+    animation: shake 0.5s ease-in-out;
+  }
+
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-slide-in {
+    animation: slideIn 0.5s ease-out forwards;
+  }
+
+  @keyframes countDown {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+  }
+
+  .animate-countdown {
+    animation: countDown 1s ease-in-out infinite;
+  }
+}
