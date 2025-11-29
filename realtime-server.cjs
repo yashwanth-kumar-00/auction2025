@@ -96,10 +96,11 @@ const path = require('path');
 const distPath = path.join(__dirname, 'dist');
 app.use(express.static(distPath));
 
-// fallback to index.html for SPA routes
-app.get('*', (req, res) => {
+// fallback to index.html for SPA routes — use middleware (no path-to-regexp parsing)
+app.use((req, res) => {
   res.sendFile(path.join(distPath, 'index.html'));
 });
+
 
 
 const PORT = process.env.REALTIME_PORT || 4000;
